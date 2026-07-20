@@ -1,0 +1,1344 @@
+<br />
+<b>Warning</b>:  session_start(): open(C:\xampp\tmp\sess_a8mp7aj86p3i33mp9up5f0f1td, O_RDWR) failed: Permission denied (13) in <b>C:\xampp\htdocs\revive\config\db.php</b> on line <b>6</b><br />
+<br />
+<b>Warning</b>:  session_start(): Failed to read session data: files (path: C:\xampp\tmp) in <b>C:\xampp\htdocs\revive\config\db.php</b> on line <b>6</b><br />
+<br />
+<b>Warning</b>:  session_start(): open(C:\xampp\tmp\sess_j635at3o0vr3dcipsk9l7a1qdk, O_RDWR) failed: Permission denied (13) in <b>C:\xampp\htdocs\revive\includes\header.php</b> on line <b>3</b><br />
+<br />
+<b>Warning</b>:  session_start(): Failed to read session data: files (path: C:\xampp\tmp) in <b>C:\xampp\htdocs\revive\includes\header.php</b> on line <b>3</b><br />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Revive - The premium destination for pre-loved luxury and streetwear. Buy and sell sustainable fashion securely.">
+    <meta name="keywords" content="fashion, streetwear, luxury, second-hand, sustainable, marketplace, revive">
+    <title>Revive | Modern Second-Hand Fashion</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- AOS Library for Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #050505;
+            color: #ffffff;
+        }
+        .glass-nav {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .neon-text {
+            color: #bcff00; /* Electric Lime */
+            text-shadow: 0 0 10px rgba(188, 255, 0, 0.5);
+        }
+        .neon-btn {
+            background-color: #bcff00;
+            color: #000;
+            transition: all 0.3s ease;
+        }
+        .neon-btn:hover {
+            box-shadow: 0 0 20px rgba(188, 255, 0, 0.8);
+            transform: translateY(-2px);
+        }
+        /* Toast Notifications */
+        .toast {
+            position: fixed;
+            top: 90px;        /* navbar ke neeche enough gap */
+            right: 24px;
+            max-width: calc(100vw - 48px);
+            transform: translateY(-20px);
+            opacity: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 14px 28px;
+            border-radius: 20px;
+            z-index: 60;      /* navbar z-50 se upar, dropdowns se neeche */
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            pointer-events: none;
+        }
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .toast.success { border-color: #bcff00; color: #bcff00; }
+        .toast.error { border-color: #ff4d4d; color: #ff4d4d; }
+
+        /* Autofill Dark Mode Fix */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover, 
+        input:-webkit-autofill:focus, 
+        input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 30px #111111 inset !important;
+            -webkit-text-fill-color: white !important;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="glass-nav sticky top-0 z-50 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <!-- Mobile Menu Toggle -->
+            <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-gray-400 hover:text-[#bcff00] transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+
+            <a href="index.php" class="text-3xl font-bold tracking-tighter">
+                REVIVE<span class="neon-text">.</span>
+            </a>
+            
+            <div class="hidden md:flex space-x-8 items-center font-medium">
+                                    <a href="index.php" class="hover:text-white transition">Home</a>
+                    <a href="shop.php" class="hover:text-white transition">Shop</a>
+                    
+                    <!-- Search Bar -->
+                                                </div>
+
+            <div class="flex items-center space-x-4 md:space-x-6">
+                                    <!-- Wishlist Icon -->
+                    <a href="wishlist.php" class="relative group p-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400 group-hover:text-red-500 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                        <span id="wishlist-count" class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+                    </a>
+
+                    <!-- Cart Icon -->
+                    <button onclick="toggleCart()" class="relative group p-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400 group-hover:text-[#bcff00] transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                        <span id="cart-count" class="absolute -top-1 -right-1 bg-[#bcff00] text-black text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+                    </button>
+
+                    <!-- Notification Bell -->
+                    <div class="relative">
+                        <button onclick="toggleNotifications()" class="relative group p-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400 group-hover:text-[#bcff00] transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                            </svg>
+                            <span id="notif-badge" class="absolute top-1 right-1 w-2 h-2 bg-[#bcff00] rounded-full border-2 border-black hidden"></span>
+                        </button>
+                        
+                        <div id="notif-dropdown" class="absolute right-0 mt-4 w-80 bg-[#0a0a0a] border border-white/10 rounded-[2rem] shadow-2xl z-[100] opacity-0 pointer-events-none transition-all duration-300 scale-95 origin-top-right overflow-hidden">
+                            <div class="p-6 border-b border-white/5 flex justify-between items-center bg-white/[0.02]">
+                                <h4 class="font-bold text-sm uppercase tracking-widest">Alerts</h4>
+                                <button onclick="markAllRead()" class="text-[10px] text-red-500 font-bold uppercase tracking-widest hover:underline">Delete All</button>
+                            </div>
+                            <div id="notif-items" class="max-h-[400px] overflow-y-auto">
+                                <!-- Notifications loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                
+                                    <a href="login.php" class="text-gray-400 hover:text-white text-sm font-medium transition hidden md:block">Login</a>
+                    <a href="register.php" class="neon-btn font-bold px-6 py-2 rounded-full text-sm hidden sm:block">
+                        Join
+                    </a>
+                            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/80 backdrop-blur-md z-[110] opacity-0 pointer-events-none transition-opacity duration-300 md:hidden" onclick="toggleMobileMenu()"></div>
+    <div id="mobile-menu" class="fixed left-0 top-0 h-full w-full max-w-[300px] bg-[#050505] border-r border-white/10 z-[111] -translate-x-full transition-transform duration-500 md:hidden flex flex-col p-8">
+        <div class="flex justify-between items-center mb-12">
+            <span class="text-2xl font-bold tracking-tighter">REVIVE<span class="neon-text">.</span></span>
+            <button onclick="toggleMobileMenu()" class="text-gray-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="flex flex-col space-y-6 text-xl font-bold">
+                            <a href="index.php" class="hover:text-[#bcff00] transition">Home</a>
+                <a href="shop.php" class="hover:text-[#bcff00] transition">Shop</a>
+                            
+                            <a href="login.php" class="hover:text-[#bcff00] transition">Login</a>
+                <a href="register.php" class="text-[#bcff00] transition">Join Community</a>
+                    </div>
+    </div>
+        </div>
+    </nav>
+
+        <!-- Cart Drawer Overlay -->
+    <div id="cart-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] opacity-0 pointer-events-none transition-opacity duration-300" onclick="toggleCart()"></div>
+    
+    <!-- Cart Drawer -->
+    <div id="cart-drawer" class="fixed right-0 top-0 h-full w-full max-w-md bg-[#0a0a0a] border-l border-white/10 z-[101] translate-x-full transition-transform duration-500 flex flex-col">
+        <div class="p-8 border-b border-white/10 flex justify-between items-center">
+            <h2 class="text-2xl font-bold">Your <span class="neon-text">Bag</span></h2>
+            <button onclick="toggleCart()" class="text-gray-500 hover:text-white transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <div id="cart-items" class="flex-1 overflow-y-auto p-8 space-y-6">
+            <!-- Items loaded here -->
+        </div>
+
+        <div class="p-8 border-t border-white/10 bg-white/[0.02]">
+            <div class="flex justify-between items-center mb-6">
+                <span class="text-gray-400 font-medium">Subtotal</span>
+                <span id="cart-total" class="text-2xl font-bold text-[#bcff00]">₹0</span>
+            </div>
+            <a href="checkout.php" class="neon-btn w-full block text-center font-bold py-4 rounded-2xl shadow-lg">
+                Checkout Now
+            </a>
+        </div>
+    </div>
+    
+    <div id="toast-container" class="toast"></div>
+
+    <script>
+    function showToast(message, type = 'success') {
+        const toast = document.getElementById('toast-container');
+        toast.innerText = message;
+        toast.className = `toast show ${type}`;
+        
+        setTimeout(() => {
+            toast.className = 'toast';
+        }, 4000);
+    }
+
+    // Check URL for messages (skip 'logged_in' — index.php handles that separately)
+    document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('success')) {
+            const val = urlParams.get('success');
+            if (val !== 'logged_in') { // index.php has its own welcome toast
+                const msg = val.replace(/_/g, ' ');
+                showToast(msg.charAt(0).toUpperCase() + msg.slice(1), 'success');
+            }
+        }
+        if (urlParams.has('error')) {
+            const msg = urlParams.get('error').replace('_', ' ');
+            showToast(msg.charAt(0).toUpperCase() + msg.slice(1), 'error');
+        }
+
+        // AOS Initialization
+        if (typeof AOS !== 'undefined') {
+            AOS.init({
+                duration: 800,
+                once: true,
+                easing: 'ease-out-quad'
+            });
+        }
+    });
+
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        const overlay = document.getElementById('mobile-menu-overlay');
+        const isClosed = menu.classList.contains('-translate-x-full');
+        
+        if(isClosed) {
+            menu.classList.remove('-translate-x-full');
+            overlay.classList.remove('opacity-0', 'pointer-events-none');
+        } else {
+            menu.classList.add('-translate-x-full');
+            overlay.classList.add('opacity-0', 'pointer-events-none');
+        }
+    }
+
+    function toggleCart() {
+        const drawer = document.getElementById('cart-drawer');
+        const overlay = document.getElementById('cart-overlay');
+        const isClosed = drawer.classList.contains('translate-x-full');
+        
+        if(isClosed) {
+            drawer.classList.remove('translate-x-full');
+            overlay.classList.remove('opacity-0', 'pointer-events-none');
+            loadCart();
+        } else {
+            drawer.classList.add('translate-x-full');
+            overlay.classList.add('opacity-0', 'pointer-events-none');
+        }
+    }
+
+    function loadCart() {
+        fetch('actions/cart_action.php?action=get')
+            .then(res => res.json())
+            .then(data => {
+                const container = document.getElementById('cart-items');
+                const countBadge = document.getElementById('cart-count');
+                
+                if(data.count > 0) {
+                    countBadge.innerText = data.count;
+                    countBadge.classList.remove('hidden');
+                    container.innerHTML = data.items.map(item => `
+                        <div class="flex items-center space-x-4 group">
+                            <div class="w-20 h-24 rounded-xl bg-white/5 overflow-hidden border border-white/10 flex-shrink-0">
+                                <img src="assets/img/products/${item.images}" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-sm mb-1">${item.title}</h4>
+                                <p class="text-[#bcff00] font-bold">₹${parseInt(item.price).toLocaleString()}</p>
+                                <div class="flex items-center mt-2 space-x-4">
+                                    <span class="text-xs text-gray-500 italic">Qty: ${item.quantity}</span>
+                                    <button onclick="removeFromCart(${item.id})" class="text-red-500 text-[10px] uppercase font-bold tracking-widest hover:underline">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    countBadge.classList.add('hidden');
+                    container.innerHTML = '<div class="text-center py-20 text-gray-600"><p class="mb-4">Your bag is empty.</p><a href="shop.php?view=products" class="text-[#bcff00] font-bold">Explore Shop</a></div>';
+                }
+                document.getElementById('cart-total').innerText = '₹' + parseInt(data.total).toLocaleString();
+            });
+    }
+
+    function addToCart(productId) {
+        const formData = new FormData();
+        formData.append('action', 'add');
+        formData.append('product_id', productId);
+        formData.append('csrf_token', '5f779db9146ad9a5224e6ab39cf4b542e44ad5fac60bc17f1f83141d3a25627e');
+        
+        fetch('actions/cart_action.php', { method: 'POST', body: formData })
+            .then(res => res.json())
+            .then(data => {
+                if(data.success) {
+                    toggleCart();
+                } else if(data.error === 'Login required') {
+                    window.location.href = 'login.php';
+                } else if(data.error) {
+                    showToast(data.error, 'error');
+                }
+            });
+    }
+
+    function removeFromCart(cartId) {
+        const formData = new FormData();
+        formData.append('action', 'remove');
+        formData.append('cart_id', cartId);
+        formData.append('csrf_token', '5f779db9146ad9a5224e6ab39cf4b542e44ad5fac60bc17f1f83141d3a25627e');
+        
+        fetch('actions/cart_action.php', { method: 'POST', body: formData })
+            .then(() => loadCart());
+    }
+
+    function toggleWishlist(productId, btnElement) {
+        const formData = new FormData();
+        formData.append('action', 'toggle');
+        formData.append('product_id', productId);
+        formData.append('csrf_token', '5f779db9146ad9a5224e6ab39cf4b542e44ad5fac60bc17f1f83141d3a25627e');
+        
+        fetch('actions/wishlist_action.php', { method: 'POST', body: formData })
+            .then(res => res.json())
+            .then(data => {
+                if(data.success) {
+                    const icon = btnElement.querySelector('svg');
+                    if(data.status === 'added') {
+                        icon.classList.add('fill-red-500', 'text-red-500');
+                        icon.classList.remove('text-gray-400');
+                        showToast('Added to Wishlist');
+                    } else {
+                        icon.classList.remove('fill-red-500', 'text-red-500');
+                        icon.classList.add('text-gray-400');
+                        showToast('Removed from Wishlist');
+                    }
+                    updateWishlistCount();
+                } else if(data.error === 'Login required') {
+                    window.location.href = 'login.php';
+                }
+            });
+    }
+
+    function updateWishlistCount() {
+        fetch('actions/wishlist_action.php?action=get_count')
+            .then(res => res.json())
+            .then(data => {
+                const badge = document.getElementById('wishlist-count');
+                if(data.count > 0) {
+                    badge.innerText = data.count;
+                    badge.classList.remove('hidden');
+                } else {
+                    badge.classList.add('hidden');
+                }
+            });
+    }
+
+    function toggleNotifications() {
+        const dropdown = document.getElementById('notif-dropdown');
+        const badge = document.getElementById('notif-badge');
+        const isClosed = dropdown.classList.contains('opacity-0');
+        
+        if(isClosed) {
+            dropdown.classList.remove('opacity-0', 'pointer-events-none', 'scale-95');
+            loadNotifications();
+            // Automatically mark as read when opened so the green dot vanishes instantly
+            if (!badge.classList.contains('hidden')) {
+                fetch('actions/notification_action.php?action=mark_read').then(() => {
+                    badge.classList.add('hidden');
+                });
+            }
+        } else {
+            dropdown.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
+        }
+    }
+
+    function loadNotifications() {
+        fetch('actions/notification_action.php?action=get')
+            .then(res => res.json())
+            .then(data => {
+                const container = document.getElementById('notif-items');
+                const badge = document.getElementById('notif-badge');
+                
+                if(data.unread > 0) {
+                    badge.classList.remove('hidden');
+                } else {
+                    badge.classList.add('hidden');
+                }
+
+                if(data.notifications.length > 0) {
+                    container.innerHTML = data.notifications.map(n => `
+                        <div class="p-6 border-b border-white/5 hover:bg-white/[0.02] transition cursor-default">
+                            <p class="text-sm text-gray-300 leading-relaxed mb-2">${n.message}</p>
+                            <span class="text-[9px] text-gray-600 font-bold uppercase tracking-widest">${n.time_ago}</span>
+                        </div>
+                    `).join('');
+                } else {
+                    container.innerHTML = '<div class="p-12 text-center text-gray-600 text-xs italic">No new notifications.</div>';
+                }
+            });
+    }
+
+    function markAllRead() {
+        fetch('actions/notification_action.php?action=clear_all')
+            .then(() => {
+                loadNotifications();
+                showToast('All notifications deleted', 'success');
+            });
+    }
+
+    function toggleAccount() {
+        const dropdown = document.getElementById('account-dropdown');
+        const isClosed = dropdown.classList.contains('opacity-0');
+        
+        if(isClosed) {
+            dropdown.classList.remove('opacity-0', 'pointer-events-none', 'scale-95');
+        } else {
+            dropdown.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
+        }
+    }
+
+    // Close dropdowns on outside click
+    window.addEventListener('click', (e) => {
+        if (!e.target.closest('button')) {
+            document.getElementById('notif-dropdown')?.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
+            document.getElementById('account-dropdown')?.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
+        }
+    });
+
+    // Smart Search Logic
+    const searchInput = document.getElementById('search-input');
+    const suggestionsBox = document.getElementById('search-suggestions');
+    let searchTimeout;
+
+    if(searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            clearTimeout(searchTimeout);
+            const query = e.target.value;
+
+            if(query.length >= 2) {
+                searchTimeout = setTimeout(() => {
+                    fetch(`actions/search_suggestions.php?q=${query}`)
+                        .then(res => res.json())
+                        .then(data => {
+                            if(data.length > 0) {
+                                suggestionsBox.innerHTML = data.map(item => `
+                                    <a href="product_details.php?id=${item.id}" class="flex items-center space-x-4 p-4 hover:bg-white/[0.03] transition group border-b border-white/5 last:border-0">
+                                        <div class="w-12 h-12 rounded-xl bg-white/5 overflow-hidden flex-shrink-0">
+                                            <img src="assets/img/products/${item.images}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-bold text-white mb-0.5 line-clamp-1">${item.title}</p>
+                                            <p class="text-[10px] uppercase font-bold text-[#bcff00]">₹${parseInt(item.price).toLocaleString()} • ${item.brand}</p>
+                                        </div>
+                                    </a>
+                                `).join('') + `
+                                    <button onclick="document.forms[0].submit()" class="w-full p-4 text-center text-[10px] uppercase font-black tracking-widest text-gray-500 hover:text-white transition bg-white/[0.02]">
+                                        View All Results
+                                    </button>
+                                `;
+                                suggestionsBox.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+                            } else {
+                                suggestionsBox.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+                            }
+                        });
+                }, 300);
+            } else {
+                suggestionsBox.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+            }
+        });
+
+        // Close search on escape
+        document.addEventListener('keydown', (e) => {
+            if(e.key === 'Escape') suggestionsBox.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+        });
+    }
+
+    // Initial count load
+    document.addEventListener('DOMContentLoaded', () => {
+        updateWishlistCount();
+        loadNotifications(); // Load unread badge on start
+        fetch('actions/cart_action.php?action=get')
+            .then(res => res.json())
+            .then(data => {
+                const countBadge = document.getElementById('cart-count');
+                if(data.count > 0) {
+                    countBadge.innerText = data.count;
+                    countBadge.classList.remove('hidden');
+                }
+            });
+    });
+    </script>
+
+<style>
+    .size-tag-checkbox:checked + div {
+        background-color: #bcff00;
+        color: #000;
+        border-color: #bcff00;
+        font-weight: bold;
+    }
+    .cat-tag-checkbox:checked + div {
+        background-color: #bcff00;
+        color: #000;
+        border-color: #bcff00;
+        font-weight: bold;
+    }
+    .custom-scroll::-webkit-scrollbar { width: 4px; height: 4px; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+    .loading-grid { opacity: 0.3; pointer-events: none; transition: opacity 0.3s; }
+    .range-slider { position: relative; height: 4px; background: rgba(255,255,255,0.1); border-radius: 4px; }
+    .range-slider .progress { position: absolute; height: 100%; left: 0%; right: 0%; background: #bcff00; border-radius: 4px; }
+    .range-input { position: relative; height: 20px; margin-top: 8px; }
+    .range-input input { position: absolute; width: 100%; height: 4px; top: 0; background: none; pointer-events: none; -webkit-appearance: none; appearance: none; }
+    input[type="range"]::-webkit-slider-thumb { height: 16px; width: 16px; border-radius: 50%; background: #bcff00; pointer-events: auto; -webkit-appearance: none; cursor: pointer; }
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+    input[type="number"] { -moz-appearance: textfield; }
+    .filter-section { border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .suggestion-dropdown { position: absolute; top: 105%; left: 0; width: 100%; background: #0f1115; border: 1px solid rgba(255,255,255,0.1); border-radius: 1rem; box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 100; overflow: hidden; }
+    .suggestion-item { padding: 10px 16px; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.2s; font-size: 12px; }
+    .suggestion-item:hover { background: rgba(255,255,255,0.05); }
+    .list-view-card { display: flex; flex-direction: row; }
+    .list-view-card .card-img { width: 100px; flex-shrink: 0; aspect-ratio: 1; }
+    #products-catalog-grid.list-view { grid-template-columns: 1fr !important; }
+</style>
+
+<!-- Shop Page -->
+<section class="pt-10 pb-24 px-4 md:px-6 max-w-7xl mx-auto">
+
+    <!-- Page Title -->
+    <div class="mb-8" data-aos="fade-up">
+        <h1 class="text-4xl font-black tracking-tight">Shop</h1>
+        <p class="text-gray-500 text-sm mt-1">Discover sustainable fashion from trusted sellers.</p>
+    </div>
+
+    <!-- Search Bar -->
+        <div class="relative w-full mb-8" data-aos="fade-up">
+        <div class="relative max-w-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <input type="text" id="shop-search-input" placeholder="Search title, brand, category..."
+                class="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 py-3 text-sm focus:outline-none focus:border-[#bcff00] transition text-white">
+        </div>
+        <div id="suggestions-box" class="suggestion-dropdown hidden" style="max-width:32rem;"></div>
+    </div>
+    
+    <!-- Main Grid -->
+    <div class="flex gap-8 items-start">
+
+                <!-- ═══ FILTER SIDEBAR ═══ -->
+        <aside id="shop-filters-sidebar" class="hidden lg:flex flex-col w-64 flex-shrink-0 sticky top-24 bg-[#111] border border-white/8 rounded-2xl overflow-hidden">
+            <!-- Header -->
+            <div class="flex items-center justify-between px-5 py-4 border-b border-white/8">
+                <span class="text-xs font-black uppercase tracking-widest text-white">Filters</span>
+                <button onclick="clearAllFilters()" class="text-[#bcff00] text-xs font-bold hover:underline flex items-center space-x-1">
+                    <span>Clear All</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+
+            <form id="filters-form" class="flex flex-col flex-1 overflow-y-auto custom-scroll">
+
+                <!-- GENDER (styled as pills) -->
+                <div class="filter-section px-5 py-4">
+                    <button type="button" onclick="toggleSection('section-category')" class="flex items-center justify-between w-full mb-3">
+                        <span class="text-[11px] font-black uppercase tracking-widest text-gray-400">Gender</span>
+                        <svg id="icon-category" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+                    </button>
+                    <div id="section-category" class="flex flex-wrap gap-2">
+                                                <label class="cursor-pointer">
+                            <input type="checkbox" name="categories[]" value="9" class="cat-tag-checkbox sr-only" onchange="triggerFiltersReload()">
+                            <div class="px-3 py-1.5 border border-white/10 rounded-lg text-xs font-bold text-gray-400 hover:border-white/30 hover:text-white transition select-none">
+                                Accessories                            </div>
+                        </label>
+                                                <label class="cursor-pointer">
+                            <input type="checkbox" name="categories[]" value="13" class="cat-tag-checkbox sr-only" onchange="triggerFiltersReload()">
+                            <div class="px-3 py-1.5 border border-white/10 rounded-lg text-xs font-bold text-gray-400 hover:border-white/30 hover:text-white transition select-none">
+                                Footwear                            </div>
+                        </label>
+                                                <label class="cursor-pointer">
+                            <input type="checkbox" name="categories[]" value="8" class="cat-tag-checkbox sr-only" onchange="triggerFiltersReload()">
+                            <div class="px-3 py-1.5 border border-white/10 rounded-lg text-xs font-bold text-gray-400 hover:border-white/30 hover:text-white transition select-none">
+                                Kids                            </div>
+                        </label>
+                                                <label class="cursor-pointer">
+                            <input type="checkbox" name="categories[]" value="12" class="cat-tag-checkbox sr-only" onchange="triggerFiltersReload()">
+                            <div class="px-3 py-1.5 border border-white/10 rounded-lg text-xs font-bold text-gray-400 hover:border-white/30 hover:text-white transition select-none">
+                                Luxury                            </div>
+                        </label>
+                                                <label class="cursor-pointer">
+                            <input type="checkbox" name="categories[]" value="6" class="cat-tag-checkbox sr-only" onchange="triggerFiltersReload()">
+                            <div class="px-3 py-1.5 border border-white/10 rounded-lg text-xs font-bold text-gray-400 hover:border-white/30 hover:text-white transition select-none">
+                                Men                            </div>
+                        </label>
+                                                <label class="cursor-pointer">
+                            <input type="checkbox" name="categories[]" value="10" class="cat-tag-checkbox sr-only" onchange="triggerFiltersReload()">
+                            <div class="px-3 py-1.5 border border-white/10 rounded-lg text-xs font-bold text-gray-400 hover:border-white/30 hover:text-white transition select-none">
+                                Streetwear                            </div>
+                        </label>
+                                                <label class="cursor-pointer">
+                            <input type="checkbox" name="categories[]" value="11" class="cat-tag-checkbox sr-only" onchange="triggerFiltersReload()">
+                            <div class="px-3 py-1.5 border border-white/10 rounded-lg text-xs font-bold text-gray-400 hover:border-white/30 hover:text-white transition select-none">
+                                Vintage                            </div>
+                        </label>
+                                                <label class="cursor-pointer">
+                            <input type="checkbox" name="categories[]" value="7" class="cat-tag-checkbox sr-only" onchange="triggerFiltersReload()">
+                            <div class="px-3 py-1.5 border border-white/10 rounded-lg text-xs font-bold text-gray-400 hover:border-white/30 hover:text-white transition select-none">
+                                Women                            </div>
+                        </label>
+                                            </div>
+                </div>
+
+                <!-- SIZE (styled as pills) -->
+                <div class="filter-section px-5 py-4">
+                    <button type="button" onclick="toggleSection('section-size')" class="flex items-center justify-between w-full mb-3">
+                        <span class="text-[11px] font-black uppercase tracking-widest text-gray-400">Size</span>
+                        <svg id="icon-size" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+                    </button>
+                    <div id="section-size" class="flex flex-wrap gap-2">
+                                                <label class="cursor-pointer">
+                            <input type="checkbox" name="sizes[]" value="XS" class="size-tag-checkbox sr-only" onchange="triggerFiltersReload()">
+                            <div class="px-3 py-1.5 border border-white/10 rounded-lg text-xs font-bold text-gray-400 hover:border-white/30 hover:text-white transition select-none">
+                                XS                            </div>
+                        </label>
+                                                <label class="cursor-pointer">
+                            <input type="checkbox" name="sizes[]" value="S" class="size-tag-checkbox sr-only" onchange="triggerFiltersReload()">
+                            <div class="px-3 py-1.5 border border-white/10 rounded-lg text-xs font-bold text-gray-400 hover:border-white/30 hover:text-white transition select-none">
+                                S                            </div>
+                        </label>
+                                                <label class="cursor-pointer">
+                            <input type="checkbox" name="sizes[]" value="M" class="size-tag-checkbox sr-only" onchange="triggerFiltersReload()">
+                            <div class="px-3 py-1.5 border border-white/10 rounded-lg text-xs font-bold text-gray-400 hover:border-white/30 hover:text-white transition select-none">
+                                M                            </div>
+                        </label>
+                                                <label class="cursor-pointer">
+                            <input type="checkbox" name="sizes[]" value="L" class="size-tag-checkbox sr-only" onchange="triggerFiltersReload()">
+                            <div class="px-3 py-1.5 border border-white/10 rounded-lg text-xs font-bold text-gray-400 hover:border-white/30 hover:text-white transition select-none">
+                                L                            </div>
+                        </label>
+                                                <label class="cursor-pointer">
+                            <input type="checkbox" name="sizes[]" value="XL" class="size-tag-checkbox sr-only" onchange="triggerFiltersReload()">
+                            <div class="px-3 py-1.5 border border-white/10 rounded-lg text-xs font-bold text-gray-400 hover:border-white/30 hover:text-white transition select-none">
+                                XL                            </div>
+                        </label>
+                                                <label class="cursor-pointer">
+                            <input type="checkbox" name="sizes[]" value="XXL" class="size-tag-checkbox sr-only" onchange="triggerFiltersReload()">
+                            <div class="px-3 py-1.5 border border-white/10 rounded-lg text-xs font-bold text-gray-400 hover:border-white/30 hover:text-white transition select-none">
+                                XXL                            </div>
+                        </label>
+                                                <label class="cursor-pointer">
+                            <input type="checkbox" name="sizes[]" value="XXXL" class="size-tag-checkbox sr-only" onchange="triggerFiltersReload()">
+                            <div class="px-3 py-1.5 border border-white/10 rounded-lg text-xs font-bold text-gray-400 hover:border-white/30 hover:text-white transition select-none">
+                                XXXL                            </div>
+                        </label>
+                                                <label class="cursor-pointer">
+                            <input type="checkbox" name="sizes[]" value="Free Size" class="size-tag-checkbox sr-only" onchange="triggerFiltersReload()">
+                            <div class="px-3 py-1.5 border border-white/10 rounded-lg text-xs font-bold text-gray-400 hover:border-white/30 hover:text-white transition select-none">
+                                Free Size                            </div>
+                        </label>
+                                                <label class="cursor-pointer">
+                            <input type="checkbox" name="sizes[]" value="Custom" class="size-tag-checkbox sr-only" onchange="triggerFiltersReload()">
+                            <div class="px-3 py-1.5 border border-white/10 rounded-lg text-xs font-bold text-gray-400 hover:border-white/30 hover:text-white transition select-none">
+                                Custom                            </div>
+                        </label>
+                                            </div>
+                </div>
+
+                <!-- CONDITION (checkboxes) -->
+                <div class="filter-section px-5 py-4">
+                    <button type="button" onclick="toggleSection('section-condition')" class="flex items-center justify-between w-full mb-3">
+                        <span class="text-[11px] font-black uppercase tracking-widest text-gray-400">Condition</span>
+                        <svg id="icon-condition" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+                    </button>
+                    <div id="section-condition" class="grid grid-cols-2 gap-2">
+                                                <label class="flex items-center space-x-2 cursor-pointer group">
+                            <input type="checkbox" name="conditions[]" value="New" class="w-4 h-4 rounded border-white/20 accent-[#bcff00]" onchange="triggerFiltersReload()">
+                            <span class="text-xs text-gray-400 group-hover:text-white transition">New</span>
+                        </label>
+                                                <label class="flex items-center space-x-2 cursor-pointer group">
+                            <input type="checkbox" name="conditions[]" value="Like New" class="w-4 h-4 rounded border-white/20 accent-[#bcff00]" onchange="triggerFiltersReload()">
+                            <span class="text-xs text-gray-400 group-hover:text-white transition">Like New</span>
+                        </label>
+                                                <label class="flex items-center space-x-2 cursor-pointer group">
+                            <input type="checkbox" name="conditions[]" value="Gently Used" class="w-4 h-4 rounded border-white/20 accent-[#bcff00]" onchange="triggerFiltersReload()">
+                            <span class="text-xs text-gray-400 group-hover:text-white transition">Gently Used</span>
+                        </label>
+                                                <label class="flex items-center space-x-2 cursor-pointer group">
+                            <input type="checkbox" name="conditions[]" value="Vintage" class="w-4 h-4 rounded border-white/20 accent-[#bcff00]" onchange="triggerFiltersReload()">
+                            <span class="text-xs text-gray-400 group-hover:text-white transition">Vintage</span>
+                        </label>
+                                                <label class="flex items-center space-x-2 cursor-pointer group">
+                            <input type="checkbox" name="conditions[]" value="Used" class="w-4 h-4 rounded border-white/20 accent-[#bcff00]" onchange="triggerFiltersReload()">
+                            <span class="text-xs text-gray-400 group-hover:text-white transition">Used</span>
+                        </label>
+                                            </div>
+                </div>
+
+                <!-- BRAND (search + checkboxes) -->
+                                <div class="filter-section px-5 py-4">
+                    <button type="button" onclick="toggleSection('section-brand')" class="flex items-center justify-between w-full mb-3">
+                        <span class="text-[11px] font-black uppercase tracking-widest text-gray-400">Brand</span>
+                        <svg id="icon-brand" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+                    </button>
+                    <div id="section-brand">
+                        <input type="text" id="brand-search-input" placeholder="Search brands..." oninput="filterBrandList(this.value)"
+                            class="w-full bg-white/5 border border-white/8 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-[#bcff00] transition mb-3">
+                        <div id="brand-list" class="space-y-2 max-h-44 overflow-y-auto custom-scroll">
+                                                        <label class="flex items-center space-x-2 cursor-pointer group brand-item">
+                                <input type="checkbox" name="brands[]" value="H&amp;M" class="w-4 h-4 rounded border-white/20 accent-[#bcff00]" onchange="triggerFiltersReload()">
+                                <span class="text-xs text-gray-400 group-hover:text-white transition">H&amp;M</span>
+                            </label>
+                                                        <label class="flex items-center space-x-2 cursor-pointer group brand-item">
+                                <input type="checkbox" name="brands[]" value="Supreme" class="w-4 h-4 rounded border-white/20 accent-[#bcff00]" onchange="triggerFiltersReload()">
+                                <span class="text-xs text-gray-400 group-hover:text-white transition">Supreme</span>
+                            </label>
+                                                        <label class="flex items-center space-x-2 cursor-pointer group brand-item">
+                                <input type="checkbox" name="brands[]" value="Zara" class="w-4 h-4 rounded border-white/20 accent-[#bcff00]" onchange="triggerFiltersReload()">
+                                <span class="text-xs text-gray-400 group-hover:text-white transition">Zara</span>
+                            </label>
+                                                    </div>
+                    </div>
+                </div>
+                
+                <!-- PRICE RANGE -->
+                <div class="px-5 py-4">
+                    <button type="button" onclick="toggleSection('section-price')" class="flex items-center justify-between w-full mb-3">
+                        <span class="text-[11px] font-black uppercase tracking-widest text-gray-400">Price Range</span>
+                        <svg id="icon-price" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+                    </button>
+                    <div id="section-price">
+                        <div class="flex justify-between text-xs text-gray-500 mb-2">
+                            <span>₹<span id="price-min-display">0</span></span>
+                            <span>₹<span id="price-max-display">4,500</span>+</span>
+                        </div>
+                        <div class="range-slider mb-4">
+                            <div class="progress" id="slider-progress-bar"></div>
+                        </div>
+                        <div class="range-input mb-4">
+                            <input type="range" class="range-min" min="0" max="4500" value="0" step="50" oninput="updateRangeInputs(this, 'min')">
+                            <input type="range" class="range-max" min="0" max="4500" value="4500" step="50" oninput="updateRangeInputs(this, 'max')">
+                        </div>
+                        <!-- Hidden inputs for form submission -->
+                        <input type="hidden" id="min-price-number" name="min_price" value="0">
+                        <input type="hidden" id="max-price-number" name="max_price" value="4500">
+                    </div>
+                </div>
+
+                <!-- Apply Filters Button -->
+                <div class="px-5 pb-5">
+                    <button type="button" onclick="triggerFiltersReload()" id="apply-filters-btn"
+                        class="w-full bg-[#bcff00] text-black font-black text-sm py-3 rounded-xl hover:bg-[#d4ff4d] transition flex items-center justify-center space-x-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+                        <span>Apply Filters <span id="filter-count-badge" class="hidden bg-black/20 rounded-full px-1.5 ml-1"></span></span>
+                    </button>
+                </div>
+
+            </form>
+        </aside>
+        
+        <!-- ═══ RIGHT SIDE: Products ═══ -->
+        <div class="flex-1 min-w-0">
+
+            <!-- Grid Header -->
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-3">
+                <div class="text-sm text-gray-500">
+                    Showing <span class="text-white font-bold" id="total-results-count">--</span> results
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-xs text-gray-500 font-bold uppercase tracking-wider">Sort by:</span>
+                        <select id="shop-sorting-select" onchange="triggerFiltersReload()"
+                            class="bg-[#111] border border-white/10 rounded-xl px-4 py-2 text-xs font-bold focus:outline-none focus:border-[#bcff00] transition text-white">
+                            <option value="newest" class="bg-[#111]">Newest First</option>
+                            <option value="price_low" class="bg-[#111]">Price: Low to High</option>
+                            <option value="price_high" class="bg-[#111]">Price: High to Low</option>
+                        </select>
+                    </div>
+                    <!-- Grid/List Toggle -->
+                    <div class="flex bg-[#111] border border-white/10 rounded-xl p-1">
+                        <button id="grid-view-btn" onclick="setViewMode('grid')" class="p-2 rounded-lg bg-[#bcff00] transition" title="Grid View">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+                        </button>
+                        <button id="list-view-btn" onclick="setViewMode('list')" class="p-2 rounded-lg transition text-gray-400 hover:text-white" title="List View">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Filter Chips -->
+            <div id="active-filter-chips" class="flex flex-wrap gap-2 mb-4 hidden"></div>
+
+            <!-- Products Grid -->
+            <div id="products-catalog-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 transition duration-300">
+                <div class="col-span-full py-32 text-center text-gray-500">Loading products...</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Mobile Filter Trigger -->
+<div class="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+    <button type="button" onclick="toggleMobileFilters(true)" class="bg-[#bcff00] text-black font-black px-8 py-3.5 rounded-full text-xs shadow-2xl flex items-center space-x-2 tracking-wider uppercase">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+        <span>Filters</span>
+    </button>
+</div>
+
+<!-- Mobile Drawer -->
+<div id="mobile-filters-drawer" class="fixed inset-0 z-[100] hidden flex flex-col justify-end">
+    <div class="absolute inset-0 bg-black/85 backdrop-blur-sm" onclick="toggleMobileFilters(false)"></div>
+    <div class="relative bg-[#111] border-t border-white/10 rounded-t-[2rem] p-6 max-h-[85vh] overflow-y-auto z-10">
+        <div class="flex justify-between items-center pb-4 border-b border-white/8 mb-4">
+            <h3 class="font-black text-sm uppercase tracking-wider">Filters</h3>
+            <button onclick="toggleMobileFilters(false)" class="text-gray-400 hover:text-white text-2xl font-bold">&times;</button>
+        </div>
+        <div id="mobile-form-placeholder" class="pb-20"></div>
+        <div class="fixed bottom-0 left-0 right-0 bg-[#111] border-t border-white/8 p-4 flex gap-3 z-20">
+            <button type="button" onclick="clearAllFilters(); toggleMobileFilters(false);" class="flex-1 py-3 text-xs font-bold uppercase border border-white/10 rounded-xl text-gray-400">Clear</button>
+            <button type="button" onclick="triggerFiltersReload(); toggleMobileFilters(false);" class="flex-1 py-3 text-xs font-black uppercase bg-[#bcff00] rounded-xl text-black">Apply</button>
+        </div>
+    </div>
+</div>
+
+<!-- Trust Strip -->
+<section class="pb-16 px-4 md:px-6 max-w-7xl mx-auto">
+    <div class="bg-[#111] border border-white/8 rounded-2xl px-6 py-5 grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="flex items-center space-x-3">
+            <span class="text-2xl">♻️</span>
+            <div>
+                <p class="text-xs font-bold text-white">Sustainable Fashion</p>
+                <p class="text-[11px] text-gray-500">Eco-friendly choices</p>
+            </div>
+        </div>
+                <div class="flex items-center space-x-3">
+            <span class="text-2xl">⭐</span>
+            <div>
+                <p class="text-xs font-bold text-white">Trusted Sellers</p>
+                <p class="text-[11px] text-gray-500">Verified & reliable</p>
+            </div>
+        </div>
+                <div class="flex items-center space-x-3">
+            <span class="text-2xl">🔒</span>
+            <div>
+                <p class="text-xs font-bold text-white">Secure Payments</p>
+                <p class="text-[11px] text-gray-500">100% protected</p>
+            </div>
+        </div>
+                <div class="flex items-center space-x-3">
+            <span class="text-2xl">↩️</span>
+            <div>
+                <p class="text-xs font-bold text-white">Easy Returns</p>
+                <p class="text-[11px] text-gray-500">Hassle-free returns</p>
+            </div>
+        </div>
+            </div>
+</section>
+
+<script>
+    let filterTimeout = null;
+    let currentViewMode = 'grid';
+
+    document.addEventListener("DOMContentLoaded", function() {
+        syncSliderInputs();
+        syncFiltersFromUrl();
+
+        // Mobile filter clone
+        const formObj = document.getElementById('filters-form');
+        const mPlace = document.getElementById('mobile-form-placeholder');
+        if (formObj && mPlace) {
+            mPlace.appendChild(formObj.cloneNode(true));
+            mPlace.addEventListener('change', function(e) {
+                const originalInput = formObj.querySelector(`[name="${e.target.name}"][value="${e.target.value}"]`);
+                if (originalInput) originalInput.checked = e.target.checked;
+            });
+        }
+
+        // Search input listener
+        const searchInput = document.getElementById('shop-search-input');
+        if (searchInput) {
+            searchInput.addEventListener('input', function() {
+                clearTimeout(filterTimeout);
+                filterTimeout = setTimeout(triggerFiltersReload, 500);
+                handleSuggestionsSearch(this.value.trim());
+            });
+        }
+    });
+
+    // ── View Mode Toggle ──
+    function setViewMode(mode) {
+        currentViewMode = mode;
+        const grid = document.getElementById('products-catalog-grid');
+        const gridBtn = document.getElementById('grid-view-btn');
+        const listBtn = document.getElementById('list-view-btn');
+        if (mode === 'list') {
+            grid.classList.add('list-view');
+            grid.style.gridTemplateColumns = '1fr';
+            gridBtn.classList.remove('bg-[#bcff00]'); gridBtn.classList.add('text-gray-400');
+            listBtn.classList.add('bg-[#bcff00]'); listBtn.classList.remove('text-gray-400');
+            listBtn.querySelector('svg').classList.add('text-black');
+        } else {
+            grid.classList.remove('list-view');
+            grid.style.gridTemplateColumns = '';
+            listBtn.classList.remove('bg-[#bcff00]'); listBtn.classList.add('text-gray-400');
+            listBtn.querySelector('svg').classList.remove('text-black');
+            gridBtn.classList.add('bg-[#bcff00]'); gridBtn.classList.remove('text-gray-400');
+        }
+    }
+
+    // ── Filter Section Toggle ──
+    function toggleSection(id) {
+        const el = document.getElementById(id);
+        const iconId = 'icon-' + id.replace('section-', '');
+        const icon = document.getElementById(iconId);
+        if (el) {
+            el.classList.toggle('hidden');
+            if (icon) icon.style.transform = el.classList.contains('hidden') ? 'rotate(180deg)' : '';
+        }
+    }
+
+    // ── Brand Search Filter ──
+    function filterBrandList(query) {
+        document.querySelectorAll('.brand-item').forEach(item => {
+            const name = item.querySelector('span').textContent.toLowerCase();
+            item.style.display = name.includes(query.toLowerCase()) ? '' : 'none';
+        });
+    }
+
+    // ── Range Slider ──
+    function updateRangeInputs(el, type) {
+        const rangeMin = document.querySelector('.range-min');
+        const rangeMax = document.querySelector('.range-max');
+        let minVal = parseInt(rangeMin.value);
+        let maxVal = parseInt(rangeMax.value);
+        if (type === 'min' && minVal >= maxVal) { rangeMin.value = maxVal - 50; minVal = maxVal - 50; }
+        if (type === 'max' && maxVal <= minVal) { rangeMax.value = minVal + 50; maxVal = minVal + 50; }
+        document.getElementById('min-price-number').value = minVal;
+        document.getElementById('max-price-number').value = maxVal;
+        document.getElementById('price-min-display').textContent = minVal.toLocaleString();
+        document.getElementById('price-max-display').textContent = maxVal.toLocaleString();
+        syncSliderProgress();
+        clearTimeout(filterTimeout);
+        filterTimeout = setTimeout(triggerFiltersReload, 600);
+    }
+
+    function syncSliderInputs() {
+        const rangeMin = document.querySelector('.range-min');
+        const rangeMax = document.querySelector('.range-max');
+        const minNum = document.getElementById('min-price-number');
+        const maxNum = document.getElementById('max-price-number');
+        if (!rangeMin || !rangeMax) return;
+        if (minNum) rangeMin.value = minNum.value;
+        if (maxNum) rangeMax.value = maxNum.value;
+        if (document.getElementById('price-min-display')) document.getElementById('price-min-display').textContent = parseInt(rangeMin.value).toLocaleString();
+        if (document.getElementById('price-max-display')) document.getElementById('price-max-display').textContent = parseInt(rangeMax.value).toLocaleString();
+        syncSliderProgress();
+    }
+
+    function syncSliderProgress() {
+        const rangeMin = document.querySelector('.range-min');
+        const rangeMax = document.querySelector('.range-max');
+        const progress = document.getElementById('slider-progress-bar');
+        if (!rangeMin || !rangeMax || !progress) return;
+        const max = parseInt(rangeMin.max);
+        const left = (parseInt(rangeMin.value) / max) * 100;
+        const right = 100 - (parseInt(rangeMax.value) / max) * 100;
+        progress.style.left = left + '%';
+        progress.style.right = right + '%';
+    }
+
+    // ── Clear All Filters ──
+    function clearAllFilters() {
+        const form = document.getElementById('filters-form');
+        if (!form) return;
+        form.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+        const rangeMin = document.querySelector('.range-min');
+        const rangeMax = document.querySelector('.range-max');
+        const maxVal = rangeMax ? rangeMax.max : 4500;
+        if (rangeMin) rangeMin.value = 0;
+        if (rangeMax) rangeMax.value = maxVal;
+        document.getElementById('min-price-number').value = 0;
+        document.getElementById('max-price-number').value = maxVal;
+        const searchInput = document.getElementById('shop-search-input');
+        if (searchInput) searchInput.value = '';
+        syncSliderInputs();
+        triggerFiltersReload();
+    }
+
+    // ── Update Filter Count Badge ──
+    function updateFilterCountBadge() {
+        const form = document.getElementById('filters-form');
+        if (!form) return;
+        const count = form.querySelectorAll('input[type="checkbox"]:checked').length;
+        const badge = document.getElementById('filter-count-badge');
+        if (badge) {
+            badge.textContent = count;
+            badge.classList.toggle('hidden', count === 0);
+        }
+    }
+
+    // ── Active Filter Chips ──
+    function updateActiveFilterChips() {
+        const chips = document.getElementById('active-filter-chips');
+        if (!chips) return;
+        chips.innerHTML = '';
+        const form = document.getElementById('filters-form');
+        const search = document.getElementById('shop-search-input')?.value.trim();
+        let hasAny = false;
+        if (search) {
+            hasAny = true;
+            chips.appendChild(makeChip(`🔍 "${search}"`, () => { document.getElementById('shop-search-input').value = ''; triggerFiltersReload(); }));
+        }
+        form.querySelectorAll('input[type="checkbox"]:checked').forEach(input => {
+            hasAny = true;
+            chips.appendChild(makeChip(input.value, () => { input.checked = false; triggerFiltersReload(); }));
+        });
+        const minP = parseInt(document.getElementById('min-price-number').value) || 0;
+        const maxP = parseInt(document.getElementById('max-price-number').value) || 0;
+        const maxLimit = 4500;
+        if (minP > 0 || maxP < maxLimit) {
+            hasAny = true;
+            chips.appendChild(makeChip(`₹${minP.toLocaleString()} – ₹${maxP.toLocaleString()}`, () => {
+                document.getElementById('min-price-number').value = 0;
+                document.getElementById('max-price-number').value = maxLimit;
+                syncSliderInputs(); triggerFiltersReload();
+            }));
+        }
+        chips.classList.toggle('hidden', !hasAny);
+    }
+
+    function makeChip(label, onRemove) {
+        const chip = document.createElement('span');
+        chip.className = 'inline-flex items-center space-x-1.5 bg-[#bcff00]/10 border border-[#bcff00]/30 text-[#bcff00] text-xs font-bold px-3 py-1.5 rounded-full';
+        chip.innerHTML = `<span>${label}</span><button class="hover:text-white transition font-black text-sm leading-none">✕</button>`;
+        chip.querySelector('button').onclick = (e) => { e.stopPropagation(); onRemove(); };
+        return chip;
+    }
+
+    // ── Mobile Filters Toggle ──
+    function toggleMobileFilters(show) {
+        const drawer = document.getElementById('mobile-filters-drawer');
+        if (drawer) drawer.classList.toggle('hidden', !show);
+    }
+
+    // ── Main Fetch Function ──
+    function triggerFiltersReload() {
+        const grid = document.getElementById('products-catalog-grid');
+        grid.classList.add('loading-grid');
+        const sortSelect = document.getElementById('shop-sorting-select').value;
+        const searchInput = document.getElementById('shop-search-input')?.value.trim() || '';
+        const form = document.getElementById('filters-form');
+        const params = new URLSearchParams();
+        params.append('ajax', '1');
+        params.append('sort', sortSelect);
+        params.append('offset', '0');
+        if (searchInput) params.append('search', searchInput);
+        form.querySelectorAll('input[type="checkbox"]:checked').forEach(input => params.append(input.name, input.value));
+        params.append('min_price', document.getElementById('min-price-number').value);
+        params.append('max_price', document.getElementById('max-price-number').value);
+        window._shopParams = params.toString();
+
+        fetch('shop.php?' + params.toString())
+            .then(res => res.text())
+            .then(html => {
+                grid.classList.remove('loading-grid');
+                grid.innerHTML = html;
+                const cardsCount = grid.querySelectorAll('a.group').length;
+                document.getElementById('total-results-count').innerText = cardsCount;
+
+                // Process Dynamic Filter Data
+                let needsReload = false;
+                const filterDataEl = document.getElementById('filter-data');
+                if (filterDataEl) {
+                    try {
+                        const data = JSON.parse(filterDataEl.textContent);
+                        
+                        const processSection = (name, counts) => {
+                            const checkboxes = document.querySelectorAll(`input[name="${name}"]`);
+                            checkboxes.forEach(chk => {
+                                const val = chk.value;
+                                const count = counts[val] || 0;
+                                const labelDiv = chk.nextElementSibling;
+                                
+                                // Update label text with count
+                                let baseText = labelDiv.innerText.replace(/\s\(\d+\)$/, '').trim();
+                                labelDiv.innerText = `${baseText} (${count})`;
+                                
+                                // Handle Empty State
+                                if (count === 0) {
+                                    chk.disabled = true;
+                                    labelDiv.classList.add('opacity-30', 'cursor-not-allowed');
+                                    // Auto-deselect if it was selected but became 0 due to other filters
+                                    if (chk.checked) {
+                                        chk.checked = false;
+                                        needsReload = true;
+                                    }
+                                } else {
+                                    chk.disabled = false;
+                                    labelDiv.classList.remove('opacity-30', 'cursor-not-allowed');
+                                }
+                            });
+                        };
+
+                        processSection('sizes[]', data.sizes);
+                        processSection('conditions[]', data.conditions);
+                        processSection('brands[]', data.brands);
+
+                    } catch (e) { console.error("Error parsing filter data", e); }
+                    filterDataEl.remove(); // Clean up DOM
+                }
+
+                params.delete('ajax'); params.delete('offset');
+                window.history.replaceState({}, '', window.location.pathname + '?' + params.toString());
+                updateActiveFilterChips();
+                updateFilterCountBadge();
+                if (currentViewMode === 'list') setViewMode('list');
+
+                // If any filter was auto-deselected, we must fetch again to show correct results
+                if (needsReload) {
+                    triggerFiltersReload();
+                }
+            })
+            .catch(() => {
+                grid.classList.remove('loading-grid');
+                grid.innerHTML = "<div class='col-span-full py-20 text-center text-red-500 font-bold'>Error loading products.</div>";
+            });
+    }
+
+    // ── Load More (Infinite Scroll) ──
+    function loadMoreProducts(nextOffset) {
+        const grid = document.getElementById('products-catalog-grid');
+        const trigger = document.getElementById('load-more-trigger');
+        if (trigger) trigger.remove();
+        const spinner = document.createElement('div');
+        spinner.id = 'load-more-spinner';
+        spinner.className = 'col-span-full flex justify-center py-10';
+        spinner.innerHTML = `<div class="w-7 h-7 border-2 border-[#bcff00] border-t-transparent rounded-full animate-spin"></div>`;
+        grid.appendChild(spinner);
+        const params = new URLSearchParams(window._shopParams || '');
+        params.set('ajax', '1'); params.set('offset', nextOffset);
+        fetch('shop.php?' + params.toString())
+            .then(res => res.text())
+            .then(html => {
+                const sp = document.getElementById('load-more-spinner');
+                if (sp) sp.remove();
+                const temp = document.createElement('div');
+                temp.innerHTML = html;
+                // Remove JSON script from pagination response
+                const fd = temp.querySelector('#filter-data');
+                if(fd) fd.remove();
+                Array.from(temp.children).forEach(child => grid.appendChild(child));
+                const cardsCount = grid.querySelectorAll('a.group').length;
+                document.getElementById('total-results-count').innerText = cardsCount;
+            })
+            .catch(() => { const sp = document.getElementById('load-more-spinner'); if (sp) sp.remove(); });
+    }
+
+    // Intersection Observer for infinite scroll
+    const gridObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && entry.target.id === 'load-more-trigger') {
+                loadMoreProducts(parseInt(entry.target.dataset.nextOffset));
+            }
+        });
+    }, { rootMargin: '200px' });
+
+    const catalogGrid = document.getElementById('products-catalog-grid');
+    if (catalogGrid) {
+        new MutationObserver(() => {
+            const trigger = document.getElementById('load-more-trigger');
+            if (trigger) gridObserver.observe(trigger);
+        }).observe(catalogGrid, { childList: true });
+    }
+
+    // ── Sync Filters from URL ──
+    function syncFiltersFromUrl() {
+        const params = new URLSearchParams(window.location.search);
+        const form = document.getElementById('filters-form');
+        if (!form) { triggerFiltersReload(); return; }
+        const sort = params.get('sort');
+        if (sort) document.getElementById('shop-sorting-select').value = sort;
+        const search = params.get('search');
+        if (search && document.getElementById('shop-search-input')) document.getElementById('shop-search-input').value = search;
+        params.getAll('categories[]').forEach(id => {
+            const chk = form.querySelector(`input[name="categories[]"][value="${id}"]`);
+            if (chk) chk.checked = true;
+        });
+        params.getAll('sizes[]').forEach(sz => {
+            const chk = form.querySelector(`input[name="sizes[]"][value="${sz}"]`);
+            if (chk) chk.checked = true;
+        });
+        params.getAll('brands[]').forEach(br => {
+            const chk = form.querySelector(`input[name="brands[]"][value="${br}"]`);
+            if (chk) chk.checked = true;
+        });
+        params.getAll('conditions[]').forEach(cond => {
+            const chk = form.querySelector(`input[name="conditions[]"][value="${cond}"]`);
+            if (chk) chk.checked = true;
+        });
+        if (params.has('min_price')) document.getElementById('min-price-number').value = params.get('min_price');
+        if (params.has('max_price')) document.getElementById('max-price-number').value = params.get('max_price');
+        syncSliderInputs();
+        triggerFiltersReload();
+    }
+
+    // ── Autocomplete Search ──
+    function handleSuggestionsSearch(keyword) {
+        const dropdown = document.getElementById('suggestions-box');
+        if (!dropdown) return;
+        if (keyword.length < 2) { dropdown.classList.add('hidden'); dropdown.innerHTML = ''; return; }
+        fetch(`actions/search_suggestions.php?q=${encodeURIComponent(keyword)}`)
+            .then(res => res.json())
+            .then(suggestions => {
+                if (!suggestions.length) { dropdown.classList.add('hidden'); return; }
+                dropdown.innerHTML = '';
+                suggestions.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'suggestion-item';
+                    div.innerHTML = `<img src="assets/img/products/${item.images}" class="w-8 h-8 rounded-lg object-cover border border-white/10 flex-shrink-0" onerror="this.style.display='none'">
+                        <div><p class="font-bold text-xs text-white truncate">${item.title}</p>
+                        <p class="text-[10px] text-gray-500">${item.brand} • ₹${Number(item.price).toLocaleString()}</p></div>`;
+                    div.onclick = () => {
+                        document.getElementById('shop-search-input').value = item.title;
+                        dropdown.classList.add('hidden');
+                        triggerFiltersReload();
+                    };
+                    dropdown.appendChild(div);
+                });
+                dropdown.classList.remove('hidden');
+            })
+            .catch(() => dropdown.classList.add('hidden'));
+    }
+</script>
+
+<!-- Newsletter Section -->
+<section class="py-24 px-6 border-t border-white/5 bg-black">
+    <div class="max-w-7xl mx-auto">
+        <div class="bg-gradient-to-r from-purple-900/20 to-[#bcff00]/10 p-12 md:p-20 rounded-[3rem] border border-white/10 relative overflow-hidden text-center" data-aos="zoom-in">
+            <!-- Decorative Blur -->
+            <div class="absolute -top-24 -right-24 w-64 h-64 bg-[#bcff00]/20 rounded-full blur-[100px]"></div>
+            
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 relative z-10">Join the <span class="neon-text">Revive</span> Circle</h2>
+            <p class="text-gray-400 text-lg mb-10 max-w-xl mx-auto relative z-10">Get early access to exclusive drops, sustainable fashion tips, and special offers.</p>
+            
+            <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-4 relative z-10" onsubmit="event.preventDefault(); subscribeNewsletter(this);">
+                <input type="hidden" name="csrf_token" value="5f779db9146ad9a5224e6ab39cf4b542e44ad5fac60bc17f1f83141d3a25627e">                <input type="email" name="email" required placeholder="Enter your email" class="flex-1 bg-black/40 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-[#bcff00] transition">
+                <button type="submit" class="neon-btn font-bold px-8 py-4 rounded-2xl whitespace-nowrap">Subscribe Now</button>
+            </form>
+            <script>
+            function subscribeNewsletter(form) {
+                const email = form.querySelector('input[name="email"]').value;
+                const csrf = form.querySelector('input[name="csrf_token"]').value;
+                fetch('actions/newsletter_action.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `email=${encodeURIComponent(email)}&csrf_token=${encodeURIComponent(csrf)}`
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Thank you for subscribing!');
+                        form.reset();
+                    } else {
+                        alert(data.error || 'Subscription failed.');
+                    }
+                })
+                .catch(err => {
+                    console.error('Error:', err);
+                    alert('An error occurred. Please try again.');
+                });
+            }
+            </script>
+        </div>
+    </div>
+</section>
+
+<footer class="bg-black border-t border-white/10 py-12 px-6 mt-20">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="col-span-1 md:col-span-2">
+                <a href="index.php" class="text-3xl font-bold tracking-tighter mb-6 block">
+                    REVIVE<span class="neon-text">.</span>
+                </a>
+                <p class="text-gray-400 max-w-sm mb-6">
+                    The premium marketplace for second-hand fashion. Give your clothes a second life.
+                </p>
+                <div class="flex space-x-4">
+                    <!-- Social Icons placeholders -->
+                    <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 cursor-pointer transition">IG</div>
+                    <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 cursor-pointer transition">TW</div>
+                    <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 cursor-pointer transition">FB</div>
+                </div>
+            </div>
+            
+            <div>
+                <h4 class="font-bold mb-6 text-white">Platform</h4>
+                <ul class="space-y-4 text-gray-400">
+                    <li><a href="info.php?page=how-it-works" class="hover:text-white transition">How it works</a></li>
+                    <li><a href="#" class="hover:text-white transition">Selling Guide</a></li>
+                    <li><a href="#" class="hover:text-white transition">Buying Guide</a></li>
+                    <li><a href="#" class="hover:text-white transition">Trust & Safety</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold mb-6 text-white">Company</h4>
+                <ul class="space-y-4 text-gray-400">
+                    <li><a href="info.php?page=about" class="hover:text-white transition">About Us</a></li>
+                    <li><a href="contact.php" class="hover:text-white transition">Contact Us</a></li>
+                    <li><a href="info.php?page=terms" class="hover:text-white transition">Terms of Service</a></li>
+                    <li><a href="info.php?page=privacy" class="hover:text-white transition">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto border-t border-white/5 mt-12 pt-8 text-center text-gray-500 text-sm">
+            &copy; 2026 Revive Marketplace. Built for the future of fashion.
+        </div>
+    </footer>
+
+    <!-- AOS Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            easing: 'ease-in-out',
+        });
+    </script>
+</body>
+</html>

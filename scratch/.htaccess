@@ -1,0 +1,5 @@
+# Block all browser access to this directory
+# Files here are for development only - NOT for public access
+
+Order deny,allow
+Deny from all
