@@ -1,6 +1,6 @@
 # Revive - Peer-to-Peer Marketplace
 
-**Revive** is a sustainable peer-to-peer (P2P) marketplace designed for everyone. It provides a secure platform where users can buy, sell, or exchange gently used items such as books, electronics, clothing, and everyday essentials. By promoting the reuse of products, Revive actively supports a circular economy and reduces waste.
+**REVIVE** is a modern second-hand fashion marketplace that provides a secure platform for users to buy and sell pre-owned clothing, footwear, bags, watches, and accessories. The platform promotes sustainable fashion by encouraging the reuse of quality products, reducing textile waste, and making premium fashion more affordable.
 
 ## 🚀 Features
 
