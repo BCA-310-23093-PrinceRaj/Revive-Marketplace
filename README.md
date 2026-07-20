@@ -1,10 +1,10 @@
-# Revive - Peer-to-Peer Campus Marketplace
+# Revive - Peer-to-Peer Marketplace
 
-**Revive** is a sustainable peer-to-peer (P2P) campus marketplace designed specifically for college students. It provides a secure, exclusive platform where students can buy, sell, or exchange gently used items such as textbooks, electronics, and clothing within their own college campus. By promoting the reuse of products, Revive actively supports a circular economy and reduces waste.
+**Revive** is a sustainable peer-to-peer (P2P) marketplace designed for everyone. It provides a secure platform where users can buy, sell, or exchange gently used items such as books, electronics, clothing, and everyday essentials. By promoting the reuse of products, Revive actively supports a circular economy and reduces waste.
 
 ## 🚀 Features
 
-*   **Campus-Exclusive Access:** Secure login for verified college students only.
+*   **Secure Access:** Secure login and registration for all users.
 *   **Buy, Sell & Exchange:** Easy-to-use interface to list products or find deals from peers.
 *   **Real-time Chat System:** Built-in messaging allows buyers and sellers to negotiate and communicate seamlessly.
 *   **Sustainability Tracking:** User profiles showcase environmental impact (e.g., water and waste saved) based on their circular economy participation.
